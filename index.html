@@ -623,22 +623,22 @@
                 setTimeout(() => {
                     puzzleGridWrap.classList.add('revealing');
                     puzzleRevealText.classList.add('show');
+                    
+                    // Add proceed button handler after it becomes visible
+                    setTimeout(() => {
+                        const proceedBtn = document.getElementById('proceedBtn');
+                        if (proceedBtn) {
+                            proceedBtn.addEventListener('click', () => {
+                                puzzleView.classList.remove('visible');
+                                setTimeout(() => {
+                                    buttonsView.classList.add('visible');
+                                }, 300);
+                            });
+                        }
+                    }, 100);
                 }, 250);
             }, 280);
         }
-
-        // Proceed button click handler
-        document.addEventListener('DOMContentLoaded', () => {
-            const proceedBtn = document.getElementById('proceedBtn');
-            if (proceedBtn) {
-                proceedBtn.addEventListener('click', () => {
-                    puzzleView.classList.remove('visible');
-                    setTimeout(() => {
-                        buttonsView.classList.add('visible');
-                    }, 300);
-                });
-            }
-        });
 
         initPuzzle();
 
