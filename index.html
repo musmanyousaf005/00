@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will you be my Chammak Challo? ❤️</title>
+    <title>Will you be my Valentine? ❤️</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <style>
         * {
@@ -278,6 +278,29 @@
             margin-bottom: 20px;
         }
 
+        .proceed-btn {
+            position: relative;
+            left: auto;
+            top: auto;
+            transform: none;
+            padding: 12px 32px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 25px;
+            background: #ff3b7a;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(255, 59, 122, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .proceed-btn:hover {
+            background: #ff1f68;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 59, 122, 0.4);
+        }
+
         /* YES/NO BUTTONS STAGE */
         .button-zone {
             position: relative;
@@ -430,6 +453,7 @@
                 <div class="puzzle-reveal-text" id="puzzleRevealText">
                     <p class="complete-line">...you complete me.</p>
                     <p class="valentine-question">Will you be my Valentine?</p>
+                    <button id="proceedBtn" class="proceed-btn">Proceed</button>
                 </div>
             </div>
 
@@ -532,7 +556,7 @@
         }
 
         function scramblePuzzle() {
-            for (let i = 0; i < 20; i++) {
+            for (let i = 0; i < 10; i++) {
                 const emptyIndex = currentState.indexOf(EMPTY_PIECE);
                 const validMoves = getValidMoves(emptyIndex);
                 const randomMove = validMoves[Math.floor(Math.random() * validMoves.length)];
@@ -599,17 +623,22 @@
                 setTimeout(() => {
                     puzzleGridWrap.classList.add('revealing');
                     puzzleRevealText.classList.add('show');
-                    
-                    // After reveal, transition to buttons after 2 seconds
-                    setTimeout(() => {
-                        puzzleView.classList.remove('visible');
-                        setTimeout(() => {
-                            buttonsView.classList.add('visible');
-                        }, 300);
-                    }, 2000);
                 }, 250);
             }, 280);
         }
+
+        // Proceed button click handler
+        document.addEventListener('DOMContentLoaded', () => {
+            const proceedBtn = document.getElementById('proceedBtn');
+            if (proceedBtn) {
+                proceedBtn.addEventListener('click', () => {
+                    puzzleView.classList.remove('visible');
+                    setTimeout(() => {
+                        buttonsView.classList.add('visible');
+                    }, 300);
+                });
+            }
+        });
 
         initPuzzle();
 
